@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VINETKA Photo Sorter — Скачать для Windows и Mac</title>
+  <meta name="description" content="Официальная страница загрузки VINETKA Photo Sorter для Windows и macOS. Интеллектуальная сортировка фотографий для выпускных альбомов и виньеток.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090b0e;
+      --card-bg: rgba(18, 22, 28, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent: #22c55e;
+      --accent-glow: rgba(34, 197, 94, 0.35);
+      --accent-blue: #38bdf8;
+      --accent-blue-glow: rgba(56, 189, 248, 0.35);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background glow effect */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 { width: 550px; height: 550px; background: #22c55e; top: -120px; left: calc(50% - 400px); }
+    .orb-2 { width: 500px; height: 500px; background: #0284c7; top: 180px; right: calc(50% - 420px); }
+
+    header {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 28px 24px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lang-switch {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 4px;
+      display: flex;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .version-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 100px;
+      color: #4ade80;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hero-title {
+      font-size: clamp(34px, 5.5vw, 56px);
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(180deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      max-width: 860px;
+    }
+
+    .hero-desc {
+      font-size: clamp(16px, 2.2vw, 19px);
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 680px;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+
+    /* Auto-detected Main Download Area */
+    .quick-download-box {
+      width: 100%;
+      max-width: 640px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
+      margin-bottom: 56px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quick-download-box:hover {
+      border-color: rgba(34, 197, 94, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: 100%;
+      padding: 20px 28px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #032b11;
+      font-weight: 800;
+      font-size: 19px;
+      text-decoration: none;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px var(--accent-glow);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-main:hover {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(34, 197, 94, 0.45);
+    }
+
+    .btn-main svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+    }
+
+    .quick-subtext {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Cards Grid */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      width: 100%;
+      margin-bottom: 60px;
+    }
+
+    .platform-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .platform-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .platform-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .platform-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .platform-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+
+    .platform-title {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .platform-badge {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .specs-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 26px;
+      flex: 1;
+    }
+
+    .specs-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .specs-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 22px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.2s ease;
+      margin-bottom: 16px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .hint-box {
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      border-left: 3px solid var(--accent);
+    }
+
+    .hint-box.blue {
+      border-left-color: var(--accent-blue);
+    }
+
+    .hint-box strong {
+      color: var(--text);
+    }
+
+    /* Features Section */
+    .features-section {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 32px;
+      letter-spacing: -0.5px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .feature-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 10;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .quick-download-box { padding: 24px 18px; }
+      .btn-main { font-size: 17px; padding: 18px 20px; }
+      .platforms-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <header>
+    <a href="#" class="brand">
+      <div class="logo-badge">V</div>
+      <div>
+        <div class="brand-title">VINETKA</div>
+        <div class="brand-sub">Photo Sorter</div>
+      </div>
+    </a>
+    <div class="header-actions">
+      <div class="lang-switch">
+        <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">РУС</button>
+        <button class="lang-btn" id="btnKk" onclick="setLang('kk')">ҚАЗ</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="version-pill">
+      <span class="pulse-dot"></span>
+      <span id="txtVersion">Релиз v2.2.7 — Официальная версия</span>
+    </div>
+
+    <h1 class="hero-title" id="txtHeroTitle">Умная сортировка фото для выпускных альбомов</h1>
+    <p class="hero-desc" id="txtHeroDesc">Автоматическое сопоставление по спискам Word и Excel, нейросетевой YuNet отбор лучших кадров и мгновенный экспорт в папки Порт / Мод / Коллаж.</p>
+
+    <!-- One-click smart downloader -->
+    <div class="quick-download-box">
+      <a href="https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.2.7/VINETKA-Photo-Sorter-Setup-2.2.7.exe" id="btnHeroDownload" class="btn-main">
+        <svg id="heroIcon" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/></svg>
+        <span id="btnHeroText">Скачать для Windows (10 / 11)</span>
+      </a>
+      <div class="quick-subtext">
+        <span id="quickSize">📦 154 МБ</span>
+        <span>•</span>
+        <span id="quickFree">Бесплатное скачивание</span>
+        <span>•</span>
+        <span id="quickArch">64-bit версия</span>
+      </div>
+    </div>
+
+    <!-- Platform Cards -->
+    <div class="platforms-grid">
+      <!-- Windows Card -->
+      <div class="platform-card" id="cardWin">
+        <div class="platform-header">
+          <div class="platform-icon">
+            <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/></svg>
+          </div>
+          <div>
+            <div class="platform-title">Windows</div>
+            <div class="platform-badge">Windows 10, 11 (64-bit)</div>
+          </div>
+        </div>
+
+        <ul class="specs-list">
+          <li class="specs-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span id="wSpec1">Мгновенный запуск за 0.3 сек</span>
+          </li>
+          <li class="specs-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span id="wSpec2">Встроенные ИИ-модели YuNet и OpenCV</span>
+          </li>
+          <li class="specs-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span id="wSpec3">Удобный установщик в один клик (.exe)</span>
+          </li>
+        </ul>
+
+        <a href="https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.2.7/VINETKA-Photo-Sorter-Setup-2.2.7.exe" id="btnWin" class="btn-secondary">
+          <svg style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/></svg>
+          <span id="txtBtnWin">Скачать Setup (154 МБ)</span>
+        </a>
+
+        <div class="hint-box">
+          <div id="wHint"><strong>При установке:</strong> Нажмите «Подробнее» ➔ «Выполнить в любом случае» (стандартная защита Windows SmartScreen).</div>
+        </div>
+      </div>
+
+      <!-- macOS Card -->
+      <div class="platform-card" id="cardMac">
+        <div class="platform-header">
+          <div class="platform-icon">
+            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.61 1.34-.55.63-.99 1.67-.86 2.69 1 .08 2.02-.51 2.55-1.18z"/></svg>
+          </div>
+          <div>
+            <div class="platform-title">macOS</div>
+            <div class="platform-badge">Apple Silicon (M1 / M2 / M3 / M4)</div>
+          </div>
+        </div>
+
+        <ul class="specs-list">
+          <li class="specs-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span id="mSpec1">Оптимизировано под процессоры Apple M-серии</span>
+          </li>
+          <li class="specs-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span id="mSpec2">Готовое приложение VINETKA.app в архиве</span>
+          </li>
+          <li class="specs-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span id="mSpec3">Полная поддержка проводника Finder и дисков</span>
+          </li>
+        </ul>
+
+        <a href="https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.2.7/VINETKA-Photo-Sorter-macOS-arm64.zip" id="btnMac" class="btn-secondary">
+          <svg style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.61 1.34-.55.63-.99 1.67-.86 2.69 1 .08 2.02-.51 2.55-1.18z"/></svg>
+          <span id="txtBtnMac">Скачать для Mac (111 МБ)</span>
+        </a>
+
+        <div class="hint-box blue">
+          <div id="mHint"><strong>При первом открытии:</strong> Распакуйте архив ➔ перетащите в «Программы» ➔ Правый клик ➔ <strong>«Открыть»</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature highlights -->
+    <div class="features-section">
+      <h2 class="section-title" id="txtFeatTitle">Возможности VINETKA Photo Sorter</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title" id="f1Title">Парсинг любых списков</div>
+          <div class="feature-desc" id="f1Desc">Поддержка Word (.docx), Excel (.xlsx), TXT и CSV. Автоматическое распознавание казахских символов (ә, ғ, қ, ң, ө, ұ, ү, һ, і) и учителей.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-title" id="f2Title">Нейросетевой ИИ-отбор</div>
+          <div class="feature-desc" id="f2Desc">Детектор YuNet определяет качество лица, резкость и открытые глаза. Автоматически рекомендует лучший кадр для портрета.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <div class="feature-title" id="f3Title">Быстрый отбор коллажей</div>
+          <div class="feature-desc" id="f3Desc">Группировка снимков по сериям и автоматический выбор групповых фото в 3 раза быстрее без зависаний.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title" id="f4Title">100% Безопасность</div>
+          <div class="feature-desc" id="f4Desc">Ваши исходные файлы съёмки неприкосновенны. Программа только копирует кадры в структуру Порт / Мод / Коллаж.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 VINETKA.KZ — Официальный портал загрузки. Репозиторий: <a href="https://github.com/erkozhakzz/vinetka-downloads" target="_blank">github.com/erkozhakzz/vinetka-downloads</a></p>
+  </footer>
+
+  <script>
+    const WIN_URL = 'https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.2.7/VINETKA-Photo-Sorter-Setup-2.2.7.exe';
+    const MAC_URL = 'https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.2.7/VINETKA-Photo-Sorter-macOS-arm64.zip';
+
+    const ICONS = {
+      win: '<svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/></svg>',
+      mac: '<svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.61 1.34-.55.63-.99 1.67-.86 2.69 1 .08 2.02-.51 2.55-1.18z"/></svg>'
+    };
+
+    let userPlatform = 'win';
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.includes('mac') || ua.includes('darwin')) {
+      userPlatform = 'mac';
+    }
+
+    let currentLang = 'ru';
+
+    const T = {
+      ru: {
+        version: 'Релиз v2.2.7 — Официальная версия',
+        heroTitle: 'Умная сортировка фото для выпускных альбомов',
+        heroDesc: 'Автоматическое сопоставление по спискам Word и Excel, нейросетевой YuNet отбор лучших кадров и мгновенный экспорт в папки Порт / Мод / Коллаж.',
+        btnHeroWin: 'Скачать для Windows (10 / 11)',
+        btnHeroMac: 'Скачать для macOS (Apple Silicon)',
+        quickSizeWin: '📦 154 МБ • Установщик .exe',
+        quickSizeMac: '📦 111 МБ • Приложение .app (.zip)',
+        quickFree: 'Бесплатное скачивание',
+        quickArchWin: '64-bit версия',
+        quickArchMac: 'M1 / M2 / M3 / M4',
+        wSpec1: 'Мгновенный запуск за 0.3 сек',
+        wSpec2: 'Встроенные ИИ-модели YuNet и OpenCV',
+        wSpec3: 'Удобный установщик в один клик (.exe)',
+        txtBtnWin: 'Скачать Setup (154 МБ)',
+        wHint: '<strong>При установке:</strong> Нажмите «Подробнее» ➔ «Выполнить в любом случае» (стандартная защита Windows SmartScreen).',
+        mSpec1: 'Оптимизировано под процессоры Apple M-серии',
+        mSpec2: 'Готовое приложение VINETKA.app в архиве',
+        mSpec3: 'Полная поддержка проводника Finder и дисков',
+        txtBtnMac: 'Скачать для Mac (111 МБ)',
+        mHint: '<strong>При первом открытии:</strong> Распакуйте архив ➔ перетащите в «Программы» ➔ Правый клик ➔ <strong>«Открыть»</strong>.',
+        featTitle: 'Возможности VINETKA Photo Sorter',
+        f1Title: 'Парсинг любых списков',
+        f1Desc: 'Поддержка Word (.docx), Excel (.xlsx), TXT и CSV. Автоматическое распознавание казахских символов (ә, ғ, қ, ң, ө, ұ, ү, һ, і) и учителей.',
+        f2Title: 'Нейросетевой ИИ-отбор',
+        f2Desc: 'Детектор YuNet определяет качество лица, резкость и открытые глаза. Автоматически рекомендует лучший кадр для портрета.',
+        f3Title: 'Быстрый отбор коллажей',
+        f3Desc: 'Группировка снимков по сериям и автоматический выбор групповых фото в 3 раза быстрее без зависаний.',
+        f4Title: '100% Безопасность',
+        f4Desc: 'Ваши исходные файлы съёмки неприкосновенны. Программа только копирует кадры в структуру Порт / Мод / Коллаж.'
+      },
+      kk: {
+        version: 'v2.2.7 шығарылымы — Ресми нұсқа',
+        heroTitle: 'Мектеп виньеткаларына арналған фотоларды ақылды сұрыптау',
+        heroDesc: 'Word және Excel тізімдері бойынша автоматты сәйкестендіру, YuNet нейрожелісі арқылы сапалы кадрларды таңдау және Порт / Мод / Коллаж папкаларына сақтау.',
+        btnHeroWin: 'Windows үшін жүктеп алу (10 / 11)',
+        btnHeroMac: 'macOS үшін жүктеп алу (Apple Silicon)',
+        quickSizeWin: '📦 154 МБ • Орнатқыш .exe',
+        quickSizeMac: '📦 111 МБ • Бағдарлама .app (.zip)',
+        quickFree: 'Тегін жүктеу',
+        quickArchWin: '64-bit нұсқасы',
+        quickArchMac: 'M1 / M2 / M3 / M4',
+        wSpec1: '0.3 секундта жылдам іске қосылу',
+        wSpec2: 'YuNet және OpenCV кірістірілген жасанды интеллектісі',
+        wSpec3: 'Бір батырмамен орнату (.exe)',
+        txtBtnWin: 'Setup жүктеп алу (154 МБ)',
+        wHint: '<strong>Орнату кезінде:</strong> «Подробнее» ➔ «Выполнить в любом случае» басыңыз (Windows SmartScreen қорғанысы).',
+        mSpec1: 'Apple M-сериялы процессорларына толық бейімделген',
+        mSpec2: 'Архивтегі дайын VINETKA.app қосымшасы',
+        mSpec3: 'Finder өткізгіші мен дискілерді толық қолдау',
+        txtBtnMac: 'Mac үшін жүктеу (111 МБ)',
+        mHint: '<strong>Алғаш қосқанда:</strong> Архивті ашып ➔ «Бағдарламаларға» көшіріңіз ➔ Тінтуірдің оң жағымен ➔ <strong>«Ашу (Открыть)»</strong> басыңыз.',
+        featTitle: 'VINETKA Photo Sorter мүмкіндіктері',
+        f1Title: 'Кез келген тізімді оқу',
+        f1Desc: 'Word (.docx), Excel (.xlsx), TXT және CSV қолдайды. Қазақ әріптерін (ә, ғ, қ, ң, ө, ұ, ү, һ, і) және мұғалімдерді дәл таниды.',
+        f2Title: 'ЖИ арқылы бетті талдау',
+        f2Desc: 'YuNet детекторы беттің анықтығын, фокусты және көздің ашықтығын тексеріп, портретке үздік кадрды ұсынады.',
+        f3Title: 'Коллаждарды жылдам таңдау',
+        f3Desc: 'Сериялар бойынша топтастыру және топтық фотоларды 3 есе жылдам сұрыптау (қатусыз).',
+        f4Title: '100% Түпнұсқа қауіпсіздігі',
+        f4Desc: 'Түпнұсқа фотосуреттер өзгертілмейді. Бағдарлама тек таңдалған кадрларды жаңа папкаларға көшіреді.'
+      }
+    };
+
+    function updateUi() {
+      const dict = T[currentLang];
+      document.getElementById('txtVersion').textContent = dict.version;
+      document.getElementById('txtHeroTitle').textContent = dict.heroTitle;
+      document.getElementById('txtHeroDesc').textContent = dict.heroDesc;
+      document.getElementById('quickFree').textContent = dict.quickFree;
+
+      document.getElementById('wSpec1').textContent = dict.wSpec1;
+      document.getElementById('wSpec2').textContent = dict.wSpec2;
+      document.getElementById('wSpec3').textContent = dict.wSpec3;
+      document.getElementById('txtBtnWin').textContent = dict.txtBtnWin;
+      document.getElementById('wHint').innerHTML = dict.wHint;
+
+      document.getElementById('mSpec1').textContent = dict.mSpec1;
+      document.getElementById('mSpec2').textContent = dict.mSpec2;
+      document.getElementById('mSpec3').textContent = dict.mSpec3;
+      document.getElementById('txtBtnMac').textContent = dict.txtBtnMac;
+      document.getElementById('mHint').innerHTML = dict.mHint;
+
+      document.getElementById('txtFeatTitle').textContent = dict.featTitle;
+      document.getElementById('f1Title').textContent = dict.f1Title;
+      document.getElementById('f1Desc').textContent = dict.f1Desc;
+      document.getElementById('f2Title').textContent = dict.f2Title;
+      document.getElementById('f2Desc').textContent = dict.f2Desc;
+      document.getElementById('f3Title').textContent = dict.f3Title;
+      document.getElementById('f3Desc').textContent = dict.f3Desc;
+      document.getElementById('f4Title').textContent = dict.f4Title;
+      document.getElementById('f4Desc').textContent = dict.f4Desc;
+
+      const heroBtn = document.getElementById('btnHeroDownload');
+      const heroText = document.getElementById('btnHeroText');
+      const heroIcon = document.getElementById('heroIcon');
+
+      if (userPlatform === 'mac') {
+        heroBtn.href = MAC_URL;
+        heroText.textContent = dict.btnHeroMac;
+        heroIcon.innerHTML = ICONS.mac;
+        document.getElementById('quickSize').textContent = dict.quickSizeMac;
+        document.getElementById('quickArch').textContent = dict.quickArchMac;
+      } else {
+        heroBtn.href = WIN_URL;
+        heroText.textContent = dict.btnHeroWin;
+        heroIcon.innerHTML = ICONS.win;
+        document.getElementById('quickSize').textContent = dict.quickSizeWin;
+        document.getElementById('quickArch').textContent = dict.quickArchWin;
+      }
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('btnRu').classList.toggle('active', lang === 'ru');
+      document.getElementById('btnKk').classList.toggle('active', lang === 'kk');
+      updateUi();
+    }
+
+    // Auto detect language from browser
+    const navLang = (navigator.language || '').toLowerCase();
+    if (navLang.startsWith('kk') || navLang.startsWith('kz')) {
+      setLang('kk');
+    } else {
+      setLang('ru');
+    }
+  </script>
+</body>
+</html>
