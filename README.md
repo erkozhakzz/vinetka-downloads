@@ -7,19 +7,19 @@
 
 ---
 
-## Прямые ссылки на скачивание (Релиз v2.2.7)
+## Прямые ссылки на скачивание (Релиз v2.3.0)
 
 | Платформа | Ссылка на скачивание | Размер | Требования |
 | :--- | :--- | :--- | :--- |
-| **Windows** | [📥 **Скачать VINETKA-Photo-Sorter-Setup-2.2.7.exe**](https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.2.7/VINETKA-Photo-Sorter-Setup-2.2.7.exe) | ~154 МБ | Windows 10, Windows 11 (64-bit) |
-| **macOS** | [🍏 **Скачать VINETKA-Photo-Sorter-macOS-arm64.zip**](https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.2.7/VINETKA-Photo-Sorter-macOS-arm64.zip) | ~111 МБ | macOS 12+ (Apple Silicon M1 / M2 / M3 / M4) |
+| **Windows** | [📥 **Скачать VINETKA-Photo-Sorter-Setup-2.3.0.exe**](https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.3.0/VINETKA-Photo-Sorter-Setup-2.3.0.exe) | ~151 МБ | Windows 10, Windows 11 (64-bit) |
+| **macOS** | [🍏 **Скачать VINETKA-Photo-Sorter-macOS-arm64.zip**](https://github.com/erkozhakzz/vinetka-downloads/releases/download/v2.3.0/VINETKA-Photo-Sorter-macOS-arm64.zip) | ~111 МБ | macOS 12+ (Apple Silicon M1 / M2 / M3 / M4) |
 
 ---
 
 ### Инструкции по установке
 
 #### Для пользователей Windows
-1. Скачайте `VINETKA-Photo-Sorter-Setup-2.2.7.exe` и запустите.
+1. Скачайте `VINETKA-Photo-Sorter-Setup-2.3.0.exe` и запустите.
 2. При появлении синего экрана Windows SmartScreen:
    - Нажмите **«Подробнее» (More info)**.
    - Нажмите кнопку **«Выполнить в любом случае» (Run anyway)**.
